@@ -15,7 +15,7 @@ if c==0:
 else:
     x = [-(2*c),2*c]
 plt.figure(figsize=(8,8)) 
-y = c*np.array(x)+c
+y = m*np.array(x)+c
 plt.plot(x,y,label=inp)
 plt.xlim(x) 
 plt.ylim(x) 
