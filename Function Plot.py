@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
-inp=input("Enter the Function:  ")
+inp=input("Enter the Function: ")
 if '+' not in inp:
     b=0
 else:
