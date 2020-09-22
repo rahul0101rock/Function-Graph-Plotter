@@ -5,12 +5,12 @@ inp=input("Enter the Function:  ")
 if '+' not in inp:
     b=0
 else:
-    b=int(inp[inp.index('=')+1:inp.index('x')])
+    b=int(inp[inp.index('+')+1:])
 if '=x' not in inp:
-    m=int(inp[inp.index('+')+1:])
+    m=int(inp[inp.index('=')+1:inp.index('x')])
 else:
     m=1
-x = [-10,10]
+x = [-20,20]
 plt.figure(figsize=(7,7)) 
 y = m*np.array(x)+b
 plt.plot(x,y,label=inp)
