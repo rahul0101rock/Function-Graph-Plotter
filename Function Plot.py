@@ -10,7 +10,7 @@ if '=x' not in inp:
     m=int(inp[inp.index('=')+1:inp.index('x')])
 else:
     m=1
-x = [-20,20]
+x = [-(2*b),2*b]
 plt.figure(figsize=(7,7)) 
 y = m*np.array(x)+b
 plt.plot(x,y,label=inp)
