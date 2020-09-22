@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+
 inp=input("Enter the Function: ")
 if '+' not in inp:
     b=0
@@ -10,7 +11,7 @@ if '=x' not in inp:
 else:
     m=1
 x = [-(2*b),2*b]
-plt.figure(figsize=(7,7)) 
+plt.figure(figsize=(8,8)) 
 y = m*np.array(x)+b
 plt.plot(x,y,label=inp)
 plt.xlim(x) 
@@ -18,8 +19,8 @@ plt.ylim(x)
 axis = plt.gca()
 plt.plot(axis.get_xlim(),[0,0],'--')
 plt.plot([0,0],axis.get_ylim(),'--')
-plt.ylabel('Y')
-plt.xlabel('X')
+plt.ylabel('Y-Axis')
+plt.xlabel('X-Axis')
 plt.title("Function Plot")
 plt.grid()
 plt.legend()
