@@ -1,24 +1,32 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import regex as re
 
-inp=input("Enter the Function (In y=mx+c format)\n-> ")
-if '+' not in inp:
-    c=0
-else:
-    c=int(inp[inp.index('+')+1:])
-if '=x' not in inp:
-    m=int(inp[inp.index('=')+1:inp.index('x')])
-else:
-    m=1
-if c==0:
-    x=[-10,10]
-else:
-    x = [-(2*c),2*c]
+inp=input("Enter the Function\n-> ")
+c=1
+point=0
+if inp.find('+')>0:
+    if 'x' not in inp[inp.rindex('+'):]:
+        c=int(inp[inp.rindex('+'):])
+        point=c
+x=np.linspace(-c,c,10000)
 plt.figure(figsize=(8,8)) 
-y = m*np.array(x)+c
+expinp=inp
+y=[]
+expinp=expinp.replace('^','**',expinp.count("^"))
+for s in re.findall(r'\D\d+x\b',inp):
+    print(s)
+    expinp=expinp.replace(s,'{}{}*{}'.format(s[0],s[1:-1],s[-1]),1)
+expinp=expinp.replace('x','np.array(x)',expinp.count("x"))
+exec(expinp)
 plt.plot(x,y,label=inp)
-plt.xlim(x) 
-plt.ylim(x) 
+plt.plot(0,point,'ro')
+plt.annotate('  (0,{})'.format(point), (0, point))
+if '^' in inp:
+    plt.xlim([-max(x)*2,max(x)*2]) 
+else:
+    plt.xlim([-max(x),max(x)]) 
+plt.ylim([-max(y),max(y)]) 
 axis = plt.gca()
 plt.plot(axis.get_xlim(),[0,0],'--')
 plt.plot([0,0],axis.get_ylim(),'--')
