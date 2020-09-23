@@ -6,7 +6,7 @@ inp=input("Enter the Function\n-> ")
 inp=inp.lower()
 c,ix,iy,last,y=1,0,0,0,[]
 if inp.find('^x')>0:c=20
-if re.search(r'.\d$',inp) is not None:
+if re.search(r'.[+-]\d$',inp) is not None:
     last=re.findall(r'[+-]\d+$',inp)[0]
     c=int(last[1:])
     if '-' in last:
