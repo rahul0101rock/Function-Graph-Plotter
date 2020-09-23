@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import regex as re
-from PIL import Image
+# from PIL import Image
 inp=input("Enter the Function\n-> ")
 inp=inp.lower()
 c,ix,iy,last,y=1,0,0,0,[]
@@ -23,16 +23,16 @@ for s in re.findall(r'\D\d+[x(]\b',inp):
 expinp=expinp.replace('^','**',expinp.count("^"))
 expinp=expinp.replace('x','np.array(x)',expinp.count("x"))
 if 'y' in inp and 'x' not in inp:
-    x=[-1,1]
     num=int(inp[inp.index("=")+1:])
-    y=[num,num]
-    plt.ylim([-max(y)*2,max(y)*2])
-    plt.ylim([-max(y),max(y)])
+    x,y=[-1,1],[num,num]
+    ix,iy=0,num
+    plt.xlim([-max(x),max(x)])
+    plt.ylim([-abs(max(y)*2),abs(max(y)*2)])
 elif 'x' in inp and 'y' not in inp:
-    y=[-1,1]
     num=int(inp[inp.index("=")+1:])
-    x=[num,num]
-    plt.xlim([-max(x)*2,max(x)*2])
+    x,y=[num,num],[-1,1]
+    ix,iy=num,0
+    plt.xlim([-abs(max(x)*2),abs(max(x)*2)])
     plt.ylim([-max(y),max(y)])
 else:
     exec(expinp)
