@@ -1,15 +1,17 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import regex as re
+from PIL import Image
 
 inp=input("Enter the Function\n-> ")
 inp=inp.lower()
 c=1
 point=0
-if inp.find('+')>0:
-    if 'x' not in inp[inp.rindex('+'):]:
-        c=int(inp[inp.rindex('+'):])
-        point=c
+if inp.find('^x')>0:c=20
+if inp[-1]!='x':
+    c=int(re.findall(r'\D\d+',inp)[0][1:])
+    point=c
+    c=2*c
 x=np.linspace(-c,c,10000)
 plt.figure(figsize=(8,8)) 
 expinp=inp
@@ -21,8 +23,8 @@ for s in re.findall(r'\D\d+\D',inp):
 expinp=expinp.replace('x','np.array(x)',expinp.count("x"))
 exec(expinp)
 plt.plot(x,y,label=inp)
-plt.plot(0,point,'ro')
-plt.annotate('  (0,{})'.format(point), (0, point))
+# plt.plot(0,point,'ro')
+# plt.annotate('  (0,{})'.format(point), (0, point))
 if '^' in inp:
     plt.xlim([-max(x)*2,max(x)*2]) 
 else:
@@ -37,3 +39,5 @@ plt.title("Function Plot")
 plt.grid()
 plt.legend()
 plt.show()
+# plt.savefig("fnplot.png",bbox_inches='tight')
+# im = Image.open('fnplot.png').show()
