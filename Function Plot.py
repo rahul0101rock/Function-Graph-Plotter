@@ -3,6 +3,7 @@ import numpy as np
 import regex as re
 
 inp=input("Enter the Function\n-> ")
+inp=inp.lower()
 c=1
 point=0
 if inp.find('+')>0:
