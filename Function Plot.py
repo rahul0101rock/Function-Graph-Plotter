@@ -22,14 +22,27 @@ for s in re.findall(r'\D\d+[x(]\b',inp):
         expinp=expinp.replace(s,'{}{}*{}'.format(s[0],s[1:-1],s[-1]),1)
 expinp=expinp.replace('^','**',expinp.count("^"))
 expinp=expinp.replace('x','np.array(x)',expinp.count("x"))
-exec(expinp)
-plt.plot(x,y,label=inp)
-if '^' in inp:
+if 'y' in inp and 'x' not in inp:
+    x=[-1,1]
+    num=int(inp[inp.index("=")+1:])
+    y=[num,num]
+    plt.ylim([-max(y)*2,max(y)*2])
+    plt.ylim([-max(y),max(y)])
+elif 'x' in inp and 'y' not in inp:
+    y=[-1,1]
+    num=int(inp[inp.index("=")+1:])
+    x=[num,num]
     plt.xlim([-max(x)*2,max(x)*2])
-    ix,iy=0,int(last)
+    plt.ylim([-max(y),max(y)])
 else:
-    plt.xlim([-max(x),max(x)]) 
-plt.ylim([-max(y),max(y)]) 
+    exec(expinp)
+    plt.ylim([-max(y),max(y)]) 
+    if '^' in inp:
+        plt.xlim([-max(x)*2,max(x)*2])
+        ix,iy=0,int(last)
+    else:
+        plt.xlim([-max(x),max(x)])
+plt.plot(x,y,label=inp)
 plt.plot(ix,iy,'ro')
 plt.annotate('  ({},{})'.format(ix,iy), (ix, iy))
 axis = plt.gca()
