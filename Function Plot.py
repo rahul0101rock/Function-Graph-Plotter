@@ -4,10 +4,10 @@ import regex as re
 from PIL import Image
 inp=input("Enter the Function\n-> ")
 inp=inp.lower()
-c,ix,iy,y=1,0,0,[]
+c,ix,iy,last,y=1,0,0,0,[]
 if inp.find('^x')>0:c=20
-if inp[-1]!='x':
-    last=re.findall(r'\D\d+$',inp)[0]
+if re.search(r'.\d$',inp) is not None:
+    last=re.findall(r'[+-]\d+$',inp)[0]
     c=int(last[1:])
     if '-' in last:
         ix,iy=c,0
