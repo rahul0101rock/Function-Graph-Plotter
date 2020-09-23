@@ -42,7 +42,7 @@ elif 'x' in inp and 'y' not in inp:
     plt.ylim([-max(y),max(y)])
 else:
     exec(expinp)
-    plt.plot(x,y,label=inp)
+    plt.plot(x,y,label='$'+inp+'$')
     plt.ylim([-max(y),max(y)]) 
     if '^' in inp:
         plt.xlim([-max(x)*2,max(x)*2])
