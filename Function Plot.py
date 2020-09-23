@@ -14,8 +14,7 @@ plt.figure(figsize=(8,8))
 expinp=inp
 y=[]
 expinp=expinp.replace('^','**',expinp.count("^"))
-for s in re.findall(r'\D\d+x\b',inp):
-    print(s)
+for s in re.findall(r'\D\d+\D',inp):
     expinp=expinp.replace(s,'{}{}*{}'.format(s[0],s[1:-1],s[-1]),1)
 expinp=expinp.replace('x','np.array(x)',expinp.count("x"))
 exec(expinp)
