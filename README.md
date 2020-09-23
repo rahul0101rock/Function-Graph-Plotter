@@ -4,3 +4,4 @@
 ![Screenshot](ss/1.png)
 ### Ploted Graph
 ![Screenshot](ss/2.png)
+![Screenshot](ss/3.png)
