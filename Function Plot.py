@@ -2,11 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import regex as re
 from PIL import Image
-
 inp=input("Enter the Function\n-> ")
 inp=inp.lower()
-c=1
-ix,iy=0,0
+c,ix,iy,y=1,0,0,[]
 if inp.find('^x')>0:c=20
 if inp[-1]!='x':
     last=re.findall(r'\D\d+$',inp)[0]
@@ -26,7 +24,6 @@ expinp=expinp.replace('^','**',expinp.count("^"))
 expinp=expinp.replace('x','np.array(x)',expinp.count("x"))
 exec(expinp)
 plt.plot(x,y,label=inp)
-
 if '^' in inp:
     plt.xlim([-max(x)*2,max(x)*2])
     ix,iy=0,int(last)
