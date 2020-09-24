@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import regex as re
-from math import sqrt,log,modf
 # from PIL import Image
-inp=input("Enter the Function\n-> ")
+print("--------'Function Graph Plotter'--------")
+inp=input("Enter the function in format 'y=fun(x)' \n-> ")
 inp=inp.lower()
 c,ix,iy,last,y=1,0,0,0,[]
 if inp.find('^x')>0:c=20
@@ -18,13 +18,16 @@ if re.search(r'.[+-]\d$',inp) is not None:
 x=np.linspace(-c,c,10000)
 plt.figure(figsize=(8,8)) 
 expinp=inp
+expinp=expinp.replace('^','**',expinp.count("^"))
 for s in re.findall(r'\D\d+[x(]\b',inp):
     if s[-1]!="*":
         expinp=expinp.replace(s,'{}{}*{}'.format(s[0],s[1:-1],s[-1]),1)
-expinp=expinp.replace('^','**',expinp.count("^"))
 if 'log' in inp:
     x = np.arange(0.01, 20.0, 0.01)
     expinp=expinp.replace(expinp[expinp.index("log("):expinp.index(")")+1],'np.exp(-{}/10.0)'.format(expinp[expinp.index("log(")+4:expinp.index(")")]))
+elif 'sqrt' in inp:
+    x = np.linspace(0,c,10000)
+    expinp=expinp.replace(expinp[expinp.index("sqrt("):expinp.index(")")+1],'np.sqrt({})'.format(expinp[expinp.index("sqrt(")+5:expinp.index(")")]))
 else:
     expinp=expinp.replace('x','np.array(x)',expinp.count("x"))
 
@@ -49,7 +52,6 @@ else:
         ix,iy=0,int(last)
     else:
         plt.xlim([-max(x),max(x)])
-
 plt.plot(ix,iy,'ro')
 plt.annotate('  ({},{})'.format(ix,iy), (ix, iy))
 axis = plt.gca()
